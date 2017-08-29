@@ -19,6 +19,9 @@ fun main(args: Array<String>) {
         println("\t$a$b")
     }
     demoValVsVar()
+    usingStringTemplates1(args)
+    usingStringTemplates2(arrayOf("Java", "Kotlin"))
+    demoMutableClass()
 }
 
 fun printMax123() {
@@ -61,11 +64,7 @@ fun demoOverloadedFunctionPassing(callback: (String, String) -> Unit) {
 fun demoValVsVar() {
     val valueString: String //This can only be set once
     valueString = "Success"
-    try {
-//        valueString = "Failure" // this line prevents compilation
-    } catch (e: Exception) {
-        //do nothing
-    }
+//    valueString = "Failure" // this line prevents compilation
     var variableString: String = "Failure"//This can be set as many times as desired
     variableString = "Success"
     println("demoValVsVar():")
@@ -73,4 +72,27 @@ fun demoValVsVar() {
     println("\tvariableString: $variableString")
 }
 
-fun canPerformOperation() = true
+fun usingStringTemplates1(args: Array<String>) {
+    val name: String = if (args.isNotEmpty()) args[0] else "Kotlin"
+    println("Hello, $name!")
+}
+
+fun usingStringTemplates2(args: Array<String>) {
+    println("Hello, ${if (args.isNotEmpty()) args[0] else "Kotlin"}!")
+}
+
+data class MutablePerson(var name: String, var isMarried: Boolean)
+
+data class ImmutablePerson(val name: String, val isMarried: Boolean)
+
+fun demoMutableClass() {
+    val mutablePerson: MutablePerson = MutablePerson("Frank", true)
+    println(mutablePerson)
+    mutablePerson.name = "Ginnie"
+    mutablePerson.isMarried = false
+    println(mutablePerson)
+    val immutablePerson: ImmutablePerson = ImmutablePerson("Hubert", false)
+    println(immutablePerson)
+//    immutablePerson.isMarried = true //This line prevents compilation
+}
+
