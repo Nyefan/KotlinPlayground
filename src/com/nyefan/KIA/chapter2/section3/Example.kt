@@ -5,6 +5,12 @@ import com.nyefan.KIA.chapter2.section3.Color.*
 fun main(args: Array<String>) {
     demoEnum()
     demoWhen()
+    demoSmartCasts()
+}
+
+fun shading(input: String) {
+    val input: Double = input.toDouble()
+    print(input);
 }
 
 enum class Color(
@@ -64,3 +70,47 @@ fun demoWhen() {
     println(mix(RED, BLUE))
     println(mixOptimized(RED, YELLOW))
 }
+
+interface Expr
+data class Num(val value: Int) : Expr
+data class Sum(val left: Expr, val right: Expr) : Expr
+
+fun eval(e: Expr): Int {
+    if (e is Num) {
+        return (e as Num).value // as Num is not required
+    }
+    if (e is Sum) {
+        return eval(e.right) + eval(e.left)
+    }
+    throw IllegalArgumentException("Unknown expression")
+}
+
+fun evalWhen(e: Expr): Int = when (e) {
+    is Num -> e.value
+    is Sum -> evalWhen(e.left) + evalWhen(e.right)
+    else -> throw IllegalArgumentException("Unknown expression")
+}
+
+fun evalLogged(e: Expr): Int {
+    return when (e) {
+        is Num -> {
+            println("num: ${e.value}")
+            e.value
+        }
+        is Sum -> {
+            val left: Int = evalLogged(e.left)
+            val right: Int = evalLogged(e.right)
+            println("sum: $left + $right")
+            left + right
+        }
+        else -> throw IllegalArgumentException("Unknown expression")
+    }
+}
+
+fun demoSmartCasts() {
+    val e: Expr = Sum(Sum(Sum(Num(1), Num(2)), Num(2)), Sum(Num(3), Num(4)))
+    println("eval($e): ${eval(e)}")
+    println("evalWhen($e): ${evalWhen(e)}")
+    println("evalLogged($e): ${evalLogged(e)}")
+}
+

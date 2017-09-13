@@ -39,4 +39,5 @@ fun main(args: Array<String>) {
      * println("The oldest is: $oldest") - String.format works by default and automatically pulls variables into scope
      */
     println("The oldest is: $oldest")
+    println("This is interesting: ${listOf<Person>().maxBy{it.age?:0}}")
 }
