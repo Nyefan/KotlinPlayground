@@ -1,4 +1,4 @@
-package com.nyefan.KIA.chapter2
+package com.nyefan.KIA.chapter2.section1
 
 fun main(args: Array<String>) {
     printMax123()
