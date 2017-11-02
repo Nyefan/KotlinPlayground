@@ -27,7 +27,7 @@ fun testIP() {
     map.forEach { proquint: String, ipString: String ->
         val generated: Proquint = Proquint.fromIP(ipString)
         assertEquals(proquint, generated.toString(), "Generated proquint: $generated from ip string: $ipString does not match expected output: $proquint")
-//        println("Generated proquint: ${Proquint.fromIP(ipString)}. Expected proquint: $proquint from ip string: $ipString")
+        println("Generated proquint: ${Proquint.fromIP(ipString)}. Expected proquint: $proquint from ip string: $ipString")
     }
 }
 
@@ -52,6 +52,6 @@ fun testHex() {
     map.forEach { proquint: String, hexString: String ->
         val generated: Proquint = Proquint.fromHexString(hexString)
         assertEquals(proquint, generated.toString(), "Generated proquint: $generated from ip string: $hexString does not match expected output: $proquint")
-//        println("Generated proquint: ${Proquint.fromHexString(hexString)}.  Expected proquint: $proquint from hex string: $hexString")
+        println("Generated proquint: ${Proquint.fromHexString(hexString)}.  Expected proquint: $proquint from hex string: $hexString")
     }
 }

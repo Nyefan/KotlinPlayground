@@ -4,6 +4,9 @@ import java.util.*
 import kotlin.experimental.and
 import kotlin.experimental.or
 
+/**
+ * inspired by https://arxiv.org/html/0901.4016
+ */
 class Proquint(arr: ShortArray) {
     companion object {
         const val prefix: String = "0q-"
